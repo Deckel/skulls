@@ -1,43 +1,6 @@
 import random
-
-class Chip:
-    def __init__(self, type) -> None:
-        self.type = type
-
-    def __repr__(self) -> str:
-        if self.type == 'skull':
-            return '💀'
-        elif self.type == 'flower':
-            return '🌸'
-        else:
-            return ValueError("No chip type with name given")
-
-class Player:
-    def __init__(self, name, emoji, chips, score) -> None:
-        self.name = name
-        self.emoji = emoji
-        self.chips = chips 
-        self.score = score 
-        self.live_chips = {}
-
-        self.current_bid = 0
-
-    def __repr__(self) -> str:
-        return f"Player {self.emoji}"
-
-    def play_chip(self) -> None:
-        move = int(input(f"{self.name} {self.emoji} please add a chip {self.chips}: "))
-        # add to live chips
-        self.live_chips.update({len(self.live_chips) + 1: self.chips[move]})
-        # remove from chips
-        self.chips.pop(move)
-        # reindex chips
-        self.chips = dict(
-            zip(
-                range(1, len(self.chips) + 1), 
-                self.chips.values()
-            )
-        )
+from chip import Chip
+from player import Player
         
 class Game:
     def __init__(self, players) -> None:
